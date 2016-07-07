@@ -9,13 +9,16 @@ $color-brand-ligh: lighten($color-brand, 10%);
 $color-secondary:#FF8A00;
 $color-secondary-dark: darken($color-secondary, 10%);
 $color-secondary-ligh: lighten($color-secondary, 10%);
+$color-secondary-semidark: darken($color-secondary, 5%);
+
+$color-foreground-light:#F5F5F5;
 
 $color-background-light: #F5F5F5;
 $color-background-lighter: lighten($color-background-light,2%);
 $color-background-dark: darken($color-background-light,10%);
 
 $radius-small: 2px;
-$animatiom-default: 0.5s;
+$animatiom-default: .5s;
 //normalize.css
 *,
 *::before,
@@ -59,6 +62,7 @@ body{
 //blocks/ms-menu.scss
 .ms-menu{
   $item-heigth: 50px;
+
   display: table-cell;
   text-align: center;
   vertical-align: middle;
@@ -89,6 +93,23 @@ body{
 
     &:active{
       background-color: $color-background-dark;
+      animation: menu-animation $animatiom-default linear forwards;
     }
   }
+  
+@keyframes menu-animation{
+  0%{
+    box-shadow: inset 0 0 2px  0 $color-secondary;
+  }
+  50%{
+    box-shadow: inset 0 $item-heigth/2 2px  0 $color-secondary-semidark;
+  }
+  100%{
+    border-color: $color-secondary-dark;
+    box-shadow: inset 0 $item-heigth 2px  0 $color-secondary-dark;
+    color: $color-foreground-light;
+    font-weight: bold;
+  }
+}
+
 }

@@ -442,4 +442,16 @@ body {
       color: #cc6e00;
       transition: all 0.5s; }
     .ms-menu-item:active {
-      background-color: gainsboro; }
+      background-color: gainsboro;
+      animation: menu-animation 0.5s linear forwards; }
+
+@keyframes menu-animation {
+  0% {
+    box-shadow: inset 0 0 2px 0 #FF8A00; }
+  50% {
+    box-shadow: inset 0 25px 2px 0 #e67c00; }
+  100% {
+    border-color: #cc6e00;
+    box-shadow: inset 0 50px 2px 0 #cc6e00;
+    color: #F5F5F5;
+    font-weight: bold; } }

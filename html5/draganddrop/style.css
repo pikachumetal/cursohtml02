@@ -1,0 +1,13 @@
+.drop1 {
+  background-color: blue;
+  float: left;
+  height: 100px;
+  width: 100px;
+}
+
+.drop2 {
+  background-color: red;
+  float: right;
+  height: 100px;
+  width: 100px;
+}

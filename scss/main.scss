@@ -76,17 +76,16 @@ body {
         line-height: $item-heigth;
         list-style: none;
         margin: 0;
-        padding: 0;
         transition: all $animatiom-default;
         @media screen and (max-width: $media-screen-max) {
             background: rgba($color-brand, .8);
             height: 100vh;
             left: 0;
-            padding-top: 10px;
+            padding-top: 55px;
             position: fixed;
             top: -100vh;
             width: 100vw;
-            z-index: 10;
+            z-index: 1;
         }
     }
     &-item {
@@ -131,7 +130,7 @@ body {
         color: $color-foreground-light;
         font-weight: bold;
         display: none;
-        z-index: 1;
+        z-index: 10;
         @media screen and (max-width: $media-screen-max) {
             $position: 10px;
             display: block;

@@ -1,115 +1,149 @@
 @import 'normalize-scss';
-@include normalize;
-
-//Variables
+@include normalize; //Variables
 $color-brand: #2F8AB2;
 $color-brand-dark: darken($color-brand, 10%);
 $color-brand-ligh: lighten($color-brand, 10%);
-
-$color-secondary:#FF8A00;
+$color-secondary: #FF8A00;
 $color-secondary-dark: darken($color-secondary, 10%);
 $color-secondary-ligh: lighten($color-secondary, 10%);
 $color-secondary-semidark: darken($color-secondary, 5%);
-
-$color-foreground-light:#F5F5F5;
-
+$color-foreground-light: #F5F5F5;
 $color-background-light: #F5F5F5;
 $color-background-lighter: lighten($color-background-light,2%);
 $color-background-dark: darken($color-background-light,10%);
-
 $radius-small: 2px;
-$animatiom-default: .5s;
-//normalize.css
+$height-header: 150px;
+$height-header-mobile: 50px;
+$animatiom-default: 0.5s;
+$media-screen-max: 750px; //normalize.css
 *,
-*::before,
-*::after{
-  box-sizing: border-box;
+*::after,
+*::before {
+    box-sizing: border-box;
 }
-
 //globals.scss
-body{
-  overflow-y: auto;
+body {
+    overflow-y: auto;
 }
-
+::selection {
+    background: $color-brand-ligh;
+}
+//states.scss
+.is {
+    &-hidden {
+        display: none;
+    }
+}
+//utils.scss
+.u{
+}
 //blocks/ms/site.scss
-.ms-site{
-  $header-height: 150px;
-  $footer-height: 50px;
-  $heights: $header-height + $footer-height;
-  $header-border: 4px;
-  $footer-border: 4px;
-  
-   &-header{
-     height: $header-height;
-     background-color: $color-brand;
-     border-bottom: solid $header-border $color-brand-dark;
-     display: table;
-     width: 100%;
-   }
-   
-   &-footer{
-     height: $footer-height;
-     background-color: $color-secondary;
-     border-top: solid $footer-border $color-secondary-dark;
-   }
-   
-   &-content{
-     background-color: $color-background-light;
-     min-height: calc(100vh - #{$heights});
-   }
-}
-
-//blocks/ms-menu.scss
-.ms-menu{
-  $item-heigth: 50px;
-
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
-
-  &-list{
-    line-height: $item-heigth;
-    list-style: none; 
-    margin: 0;
-    padding: 0;
-  }
-
-  &-item{
-    background-color: $color-background-lighter;
-    border: solid 2px $color-background-lighter;
-    border-radius: $radius-small;
-    display: inline-block;
-    height:  $item-heigth;
-    margin: 10px;
-    padding: 0 10px;
-    cursor: pointer;
+.ms-site {
+    $footer-height: 50px;
+    $header-border: 4px;
+    $footer-border: 4px;
     transition: all $animatiom-default;
-
-    &:hover{
-      border-color: $color-secondary;
-      color: $color-secondary-dark;
-      transition: all $animatiom-default;
+    &-header {
+        height: $height-header;
+        background-color: $color-brand;
+        border-bottom: solid $header-border $color-brand-dark;
+        display: table;
+        width: 100%;
+        @media screen and (max-width: $media-screen-max) {
+            height: $height-header-mobile;
+        }
     }
-
-    &:active{
-      background-color: $color-background-dark;
-      animation: menu-animation $animatiom-default linear forwards;
+    &-footer {
+        height: $footer-height;
+        background-color: $color-secondary;
+        border-top: solid $footer-border $color-secondary-dark;
     }
-  }
-  
-@keyframes menu-animation{
-  0%{
-    box-shadow: inset 0 0 2px  0 $color-secondary;
-  }
-  50%{
-    box-shadow: inset 0 $item-heigth/2 2px  0 $color-secondary-semidark;
-  }
-  100%{
-    border-color: $color-secondary-dark;
-    box-shadow: inset 0 $item-heigth 2px  0 $color-secondary-dark;
-    color: $color-foreground-light;
-    font-weight: bold;
-  }
+    &-content {
+        background-color: $color-background-light;
+        min-height: calc(100vh - #{$height-header + $footer-height});
+        @media screen and (max-width: $media-screen-max) {
+            min-height: calc(100vh - #{$height-header-mobile + $footer-height});
+        }
+    }
 }
-
+//blocks/ms-menu.scss
+.ms-menu {
+    $item-heigth: 50px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    &-list {
+        line-height: $item-heigth;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        transition: all $animatiom-default;
+        @media screen and (max-width: $media-screen-max) {
+            background: rgba($color-brand, .8);
+            height: 100vh;
+            left: 0;
+            padding-top: 10px;
+            position: fixed;
+            top: -100vh;
+            width: 100vw;
+            z-index: 10;
+        }
+    }
+    &-item {
+        background-color: $color-background-lighter;
+        border: solid 2px $color-background-lighter;
+        border-radius: $radius-small;
+        display: inline-block;
+        height: $item-heigth;
+        margin: 10px;
+        padding: 0 10px;
+        cursor: pointer;
+        transition: all $animatiom-default;
+        &:hover {
+            border-color: $color-secondary;
+            color: $color-secondary-dark;
+            transition: all $animatiom-default;
+        }
+        &:active {
+            background-color: $color-background-dark;
+            animation: menu-animation $animatiom-default linear forwards;
+        }
+        @media screen and (max-width: $media-screen-max) {
+            display: block;
+            margin: 10px auto;
+            width: 80vw;
+        }
+    }
+    @keyframes menu-animation {
+        0% {
+            box-shadow: inset 0 0 2px 0 $color-secondary;
+        }
+        50% {
+            box-shadow: inset 0 $item-heigth/2 2px 0 $color-secondary-semidark;
+        }
+        100% {
+            border-color: $color-secondary-dark;
+            box-shadow: inset 0 $item-heigth 2px 0 $color-secondary-dark;
+            color: $color-foreground-light;
+        }
+    }
+    &-toggle {
+        color: $color-foreground-light;
+        font-weight: bold;
+        display: none;
+        z-index: 1;
+        @media screen and (max-width: $media-screen-max) {
+            $position: 10px;
+            display: block;
+            left: $position;
+            height: 100vh;
+            position: fixed;
+            top: $position;
+            /*width: 100vw;*/
+        }
+    }
+    &-check:checked ~ .ms-menu-list {
+        top: 0;
+        transition: all $animatiom-default;
+    }
 }
